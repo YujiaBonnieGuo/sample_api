@@ -12,10 +12,10 @@ import handleRegister from './handler/handleRegister.js';
 import handleReset from './handler/handleReset.js';
 import handleLogin from './handler/handleLogin.js';
 import handleGetToken from './handler/handleGetToken.js';
-app.get('/healthcheck', async (req, res) => {
-  console.log('entering ./healthcheck');
-  res.send('healthcheck status as: OK');
-});
+// app.get('/healthcheck', async (req, res) => {
+//   // console.log('entering ./healthcheck');
+//   res.json('healthcheck status as: OK');
+// });
 
 app.get('/api/v1/login', handleLogin);
 app.get('/api/v1/current', jwtValidation, handleGetCurrent);
@@ -24,5 +24,9 @@ app.post('/api/v1/reset', jwtValidation, handleReset);
 app.post('/api/v1/register', handleRegister);
 
 app.get('/api/v1/token', handleGetToken);
+
+app.get('/healthcheck', (req, res) => {
+  res.json({ message: 'healthcheck status as: OK' });
+});
 
 export default app;

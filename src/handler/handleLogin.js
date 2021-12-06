@@ -44,11 +44,11 @@ const handleLogin = async (req, res) => {
         );
       }
       console.log(arr);
-      res.send(jwtToken);
+      res.json(jwtToken);
     } catch (err) {
       const errorMsg = 'failed to login with error: ' + err.message;
       console.log(errorMsg);
-      res.send(errorMsg);
+      res.json(errorMsg);
     } finally {
       if (conn != null) conn.close();
     }

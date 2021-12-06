@@ -11,7 +11,7 @@ const handleGetCurrent = async (req, res) => {
 
   if (!username || !userid) {
     console.log('invalid username or userid');
-    res.send('Please put the valid user name and user ID');
+    res.json('Please put the valid user name and user ID');
   }
   function validateId(userid, databaseID) {
     return userid === databaseID;
@@ -35,12 +35,12 @@ const handleGetCurrent = async (req, res) => {
       const current = arr[0].int;
       // update
       console.log('current :>> ', current);
-      res.send(`Your current integer is: ${current}`);
+      res.json(`Your current integer is: ${current}`);
     } catch (err) {
       const errorMsg =
         'failed to get integer in database with error: ' + err.message;
       console.log(errorMsg);
-      res.send(errorMsg);
+      res.json(errorMsg);
     } finally {
       if (conn != null) conn.close();
     }

@@ -9,7 +9,7 @@ const handleReset = async (req, res) => {
 
   if (!username || !userid) {
     console.log('invalid username or userid');
-    res.send('Please put the valid user name and user ID');
+    res.json('Please put the valid user name and user ID');
   }
   function validateId(userid, databaseID) {
     return userid === databaseID;
@@ -39,14 +39,14 @@ const handleReset = async (req, res) => {
       arr = await test.find().toArray();
       console.log(arr);
       const currentIn = arr[0].int;
-      res.send(
+      res.json(
         `Your have reset your integer from: ${current} to a new integer: ${currentIn}`
       );
     } catch (err) {
       const errorMsg =
         'failed to get integer in database with error: ' + err.message;
       console.log(errorMsg);
-      res.send(errorMsg);
+      res.json(errorMsg);
     } finally {
       if (conn != null) conn.close();
     }
