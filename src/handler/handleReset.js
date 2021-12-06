@@ -1,4 +1,4 @@
-import mongodb from 'mongodb';
+const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
 const handleReset = async (req, res) => {
@@ -54,4 +54,4 @@ const handleReset = async (req, res) => {
   dataOperate();
 };
 
-export default handleReset;
+module.exports = handleReset;

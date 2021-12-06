@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 //检查token是否过期
 
 function jwtValidation(req, res, next) {
@@ -29,4 +29,4 @@ function jwtValidation(req, res, next) {
     });
   }
 }
-export default jwtValidation;
+module.exports = jwtValidation;

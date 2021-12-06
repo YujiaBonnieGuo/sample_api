@@ -1,0 +1,91 @@
+.label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+  margin: 0.4rem 0;
+}
+.mainWrap {
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.mainWrap::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.header {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  background: rgb(255, 252, 252);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 252, 252, 1) 0%,
+    rgba(255, 255, 255, 1) 21%,
+    rgba(144, 213, 182, 1) 46%,
+    rgba(6, 135, 78, 1) 100%
+  );
+}
+
+.header::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 20px 0;
+}
+
+.header-fill {
+  float: right;
+  text-align: center;
+  font-weight: 600;
+  height: 79px;
+  color: white;
+}
+
+.header-fill:hover {
+  background-color: #229fc5;
+  border-radius: 3px;
+}
+
+.contact {
+  display: inline-block;
+  line-height: 4.7;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.contents {
+  width: 100%;
+  margin: auto;
+  padding: 40px 0;
+  border-radius: 3px;
+  background-color: #f1f3f3;
+}
+
+#language {
+  margin-bottom: 30px;
+}
+
+.login {
+  margin: auto;
+  width: 50%;
+  padding: 30px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.footer {
+  float: left;
+  margin-top: 40px;
+  width: 100%;
+}

@@ -1,4 +1,4 @@
-import mongodb from 'mongodb';
+const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
 async function checkUserName(connection, username) {
@@ -60,4 +60,4 @@ const handleRegister = async (req, res) => {
   dataOperate();
 };
 
-export default handleRegister;
+module.exports = handleRegister;

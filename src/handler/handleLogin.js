@@ -1,5 +1,5 @@
-import mongodb from 'mongodb';
-import creatToken from '../utils/creatToken.js';
+const mongodb = require('mongodb');
+const creatToken = require('../utils/creatToken.js');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
 function validateId(userid, databaseID) {
@@ -55,4 +55,4 @@ const handleLogin = async (req, res) => {
   }
 };
 
-export default handleLogin;
+module.exports = handleLogin;
