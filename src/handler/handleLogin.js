@@ -7,18 +7,18 @@ function validateId(emailAddress, databaseID) {
 }
 const handleLogin = async (req, res) => {
   console.log(' --- handleLogin is called ---');
-
+  console.log('req.body in handleLogin :>> ', req.body);
   const username = req.body.username || null;
   const emailAddress = req.body.emailAddress || null;
   console.log('username :>> ', username);
   console.log('emailAddress :>> ', emailAddress);
-  console.log('req.body :>> ', req.body);
 
   if (!username || !emailAddress) {
-    console.log('invalid username or emailAddress');
+    const errorMsg = 'user does not exist, please register';
+    console.log(errorMsg);
     return res.json({
       success: false,
-      message: 'invalid username or emailAddress',
+      message: errorMsg,
     });
   } else {
     dataOperate();

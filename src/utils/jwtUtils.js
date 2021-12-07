@@ -9,6 +9,7 @@ function jwtValidation(req, res, next) {
   // parse token
   if (token) {
     let decoded = jwt.decode(token);
+    console.log('decoded :>> ', decoded);
     if (decoded.user_id !== req.body.username) {
       return res.json({ success: false, message: 'invalid token' });
     }
