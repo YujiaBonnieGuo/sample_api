@@ -28,7 +28,11 @@ function GetToken(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        setToken(res);
+        if (res.token) {
+          setToken(res.token);
+        } else {
+          setToken(false);
+        }
       });
   }, []);
   console.log('token :>> ', token);
@@ -49,24 +53,39 @@ function fetchAPI(url, jwtToken, props_fetch, resetInt) {
   });
 }
 function Integers(props) {
-  const jwtToken = GetToken(props);
-  console.log('jwtToken :>> ', jwtToken);
   const emailAddress = props.sendEmailAddress;
   const username = props.sendUserName;
   const password = props.sendPassword;
-  const [data, setData] = React.useState(null);
   const [currentInt, setCurrentInt] = React.useState(null);
   const [nextInt, setNextInt] = React.useState(null);
   const [resetInt, setResetInt] = React.useState(null);
   const [resetRes, setResetRes] = React.useState(null);
 
+  const [data, setData] = React.useState(null);
   React.useEffect(() => {
     fetch('/healthCheck')
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
   console.log('healthCheck data :>> ', data);
+  let jwtToken = GetToken(props);
+  console.log('jwtToken :>> ', jwtToken);
 
+  if (jwtToken && jwtToken.token && jwtToken.status === 'success') {
+    jwtToken = jwtToken.token;
+  } else {
+    return (
+      <div className="mainWrap">
+        <div className="header">
+          <div className="header-fill"></div>
+        </div>
+        <div className="contents">
+          Login failed, please refresh the page and try to login again with the
+          correct password.
+        </div>
+      </div>
+    );
+  }
   const props_fetch = {
     username: username,
     emailAddress: emailAddress,

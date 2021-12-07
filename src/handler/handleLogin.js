@@ -2,17 +2,25 @@ const mongodb = require('mongodb');
 const creatToken = require('../utils/creatToken.js');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
-function validateId(emailAddress, databaseID) {
-  return emailAddress === databaseID;
-}
+
 const handleLogin = async (req, res) => {
   console.log(' --- handleLogin is called ---');
   console.log('req.body in handleLogin :>> ', req.body);
   const username = req.body.username || null;
   const emailAddress = req.body.emailAddress || null;
+  const password = req.body.password || null;
   console.log('username :>> ', username);
   console.log('emailAddress :>> ', emailAddress);
-
+  console.log('password :>> ', password);
+  if (!password) {
+    const errorMsg =
+      'invalid password, please refresh the page and try to login again';
+    console.log(errorMsg);
+    return res.json({
+      success: false,
+      message: errorMsg,
+    });
+  }
   if (!username || !emailAddress) {
     const errorMsg = 'user does not exist, please register';
     console.log(errorMsg);
@@ -33,9 +41,14 @@ const handleLogin = async (req, res) => {
       const test = conn.db('test').collection(username);
       // find
       let arr = await test.find().toArray();
-      const databaseID = arr[0].emailAddress;
-      if (!validateId(emailAddress, databaseID)) {
+
+      if (
+        arr[0].username !== username ||
+        arr[0].emailAddress !== emailAddress ||
+        arr[0].password !== password
+      ) {
         const erorObj = {
+          status: 'failed',
           message: 'emailAddress can not match with username ',
         };
         throw erorObj;
@@ -50,11 +63,19 @@ const handleLogin = async (req, res) => {
           { $set: { jwtToken: jwtToken } }
         );
       }
-      res.json(jwtToken);
+      const resObj = {
+        status: 'success',
+        token: jwtToken,
+      };
+      res.json(resObj);
     } catch (err) {
       const errorMsg = 'failed to login with error: ' + err.message;
       console.log(errorMsg);
-      res.json(errorMsg);
+      const erorObj = {
+        status: 'failed',
+        message: errorMsg,
+      };
+      res.json(erorObj);
     } finally {
       if (conn != null) conn.close();
     }
