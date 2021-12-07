@@ -4,16 +4,16 @@ let url = 'mongodb://localhost:27017/';
 const handleGetCurrent = async (req, res) => {
   console.log('--- handleGetCurrent is called ---');
   const username = req.body.username || null;
-  const userid = req.body.userid || null;
+  const emailAddress = req.body.emailAddress || null;
   const header = req.header;
-  console.log('header :>> ', header.username);
+  console.log('header :>> ', header);
 
-  if (!username || !userid) {
-    console.log('invalid username or userid');
-    res.json('Please put the valid user name and user ID');
+  if (!username || !emailAddress) {
+    console.log('invalid username or emailAddress');
+    res.json('Please put the valid user name and emailAddress');
   }
-  function validateId(userid, databaseID) {
-    return userid === databaseID;
+  function validateId(emailAddress, databaseID) {
+    return emailAddress === databaseID;
   }
   async function dataOperate() {
     let conn = null;
@@ -25,14 +25,16 @@ const handleGetCurrent = async (req, res) => {
       const test = conn.db('test').collection(username);
       // find
       let arr = await test.find().toArray();
-      const databaseID = arr[0].userid;
-      if (!validateId(userid, databaseID)) {
-        const erorObj = { message: 'userid can not match with username ' };
+      const databaseID = arr[0].emailAddress;
+      if (!validateId(emailAddress, databaseID)) {
+        const erorObj = {
+          message: 'emailAddress can not match with username ',
+        };
         throw erorObj;
       }
       const current = arr[0].int;
       // update
-      res.json(`Your current integer is: ${current}`);
+      res.json(current);
     } catch (err) {
       const errorMsg =
         'failed to get integer in database with error: ' + err.message;

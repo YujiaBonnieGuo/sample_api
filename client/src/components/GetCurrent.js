@@ -2,17 +2,17 @@
 // export default GetCurrent;
 import React, { useState, useEffect } from 'react';
 
-const GetCurrent = (props) => {
+function GetCurrent(props) {
   console.log('props in GetCurrent :>> ', props);
   const [currentInt, setCurrentInt] = useState(null);
-  const userName = props.userName;
+  const username = props.username;
   const emailAddress = props.emailAddress;
   const password = props.password;
   const token = props.token;
 
   const bodyContents = {
-    username: userName,
-    userid: emailAddress,
+    username: username,
+    emailAddress: emailAddress,
     password: password,
   };
   useEffect(() => {
@@ -31,9 +31,6 @@ const GetCurrent = (props) => {
       });
   }, []);
   console.log('GetCurrent :>> ', currentInt);
-  const showInt = () => {
-    alert(currentInt);
-  };
-  return <button onClick={showInt}>Take another shot!</button>;
-};
+  return currentInt;
+}
 export default GetCurrent;

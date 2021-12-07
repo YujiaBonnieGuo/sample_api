@@ -3,13 +3,13 @@ import './Login.css';
 
 const Login = (props) => {
   const [emailAddress, setEmailAddress] = useState('');
-  const [userName, setUserName] = useState('');
+  const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     props.getEmail(emailAddress);
-    props.getUserName(userName);
+    props.getusername(username);
     props.getPassword(password);
     props.callback(true);
   };
@@ -28,8 +28,8 @@ const Login = (props) => {
               type="text"
               placeholder="Enter your user name"
               variant="basic_line"
-              value={userName}
-              onChange={(event) => setUserName(event.target.value)}
+              value={username}
+              onChange={(event) => setusername(event.target.value)}
             />
             <br />
             <br />

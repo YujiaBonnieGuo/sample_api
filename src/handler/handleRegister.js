@@ -1,7 +1,7 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
-async function checkUserName(connection, username) {
+async function checkusername(connection, username) {
   try {
     const test = connection.db('test').collection(username);
     const res = await test.find().toArray();
@@ -16,7 +16,7 @@ async function checkUserName(connection, username) {
 }
 const handleRegister = async (req, res) => {
   const username = req.body.username || null;
-  const userid = req.body.userid || null;
+  const emailAddress = req.body.emailAddress || null;
   const password = req.body.password || null;
   const userint = req.body.int || 0;
 
@@ -24,9 +24,9 @@ const handleRegister = async (req, res) => {
     let connection = null;
     try {
       connection = await MongoClient.connect(url);
-      const ifValidUserName = await checkUserName(connection, username);
-      if (!ifValidUserName) {
-        const erorObj = { message: 'userid already exist' };
+      const ifValidusername = await checkusername(connection, username);
+      if (!ifValidusername) {
+        const erorObj = { message: 'emailAddress already exist' };
         throw erorObj;
       }
       console.log(
@@ -38,7 +38,7 @@ const handleRegister = async (req, res) => {
       // add
       await test.insertOne({
         username: username,
-        userid: userid,
+        emailAddress: emailAddress,
         password: password,
         int: userint,
       });

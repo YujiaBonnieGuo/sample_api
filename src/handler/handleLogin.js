@@ -2,21 +2,24 @@ const mongodb = require('mongodb');
 const creatToken = require('../utils/creatToken.js');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
-function validateId(userid, databaseID) {
-  return userid === databaseID;
+function validateId(emailAddress, databaseID) {
+  return emailAddress === databaseID;
 }
 const handleLogin = async (req, res) => {
   console.log(' --- handleLogin is called ---');
 
   const username = req.body.username || null;
-  const userid = req.body.userid || null;
+  const emailAddress = req.body.emailAddress || null;
   console.log('username :>> ', username);
-  console.log('userid :>> ', userid);
+  console.log('emailAddress :>> ', emailAddress);
   console.log('req.body :>> ', req.body);
 
-  if (!username || !userid) {
-    console.log('invalid username or userid');
-    return res.json({ success: false, message: 'invalid username or userid' });
+  if (!username || !emailAddress) {
+    console.log('invalid username or emailAddress');
+    return res.json({
+      success: false,
+      message: 'invalid username or emailAddress',
+    });
   } else {
     dataOperate();
   }
@@ -30,9 +33,11 @@ const handleLogin = async (req, res) => {
       const test = conn.db('test').collection(username);
       // find
       let arr = await test.find().toArray();
-      const databaseID = arr[0].userid;
-      if (!validateId(userid, databaseID)) {
-        const erorObj = { message: 'userid can not match with username ' };
+      const databaseID = arr[0].emailAddress;
+      if (!validateId(emailAddress, databaseID)) {
+        const erorObj = {
+          message: 'emailAddress can not match with username ',
+        };
         throw erorObj;
       }
       const jwtToken = creatToken(username);

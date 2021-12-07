@@ -5,26 +5,23 @@ import Integers from './components/Integers.js';
 const App = (props) => {
   let [isLoggedin, setLoggeedin] = useState(false);
   let [emailAddress, setEmailAddress] = useState('');
-  let [userName, setUserName] = useState('');
+  let [username, setusername] = useState('');
   let [password, setPassword] = useState('');
   if (isLoggedin === false) {
     return (
       <Login
         callback={setLoggeedin}
         getEmail={setEmailAddress}
-        getUserName={setUserName}
+        getusername={setusername}
         getPassword={setPassword}
       />
     );
   } else {
-    console.log('emailAddress :>> ', emailAddress);
-    console.log('userName :>> ', userName);
-    console.log('password :>> ', password);
     return (
       <div className="App">
         <Integers
           sendEmailAddress={emailAddress}
-          sendUserId={userName}
+          sendUserName={username}
           sendPassword={password}
         />
       </div>
