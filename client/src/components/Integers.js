@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 const CURRENT_URL = '/api/v1/current';
+const NEXT_URL = '/api/v1/next';
+
 function GetToken(props) {
   const [token, setToken] = useState(null);
   console.log('props :>> ', props);
@@ -50,6 +52,7 @@ function Integers(props) {
   const password = props.sendPassword;
   const [data, setData] = React.useState(null);
   const [currentInt, setCurrentInt] = React.useState(null);
+  const [nextInt, setNextInt] = React.useState(null);
 
   React.useEffect(() => {
     fetch('/healthCheck')
@@ -67,10 +70,21 @@ function Integers(props) {
   console.log('props_current :>> ', props_current);
 
   const toggleButtonState = (url) => {
+    let operation;
+    switch (url) {
+      case CURRENT_URL:
+        operation = setCurrentInt;
+        break;
+      case NEXT_URL:
+        operation = setNextInt;
+        break;
+      default:
+        console.log('wrong url :>> ', url);
+    }
     console.log('start toggleButtonState :>> ');
     fetchAPI(url, jwtToken, props_current)
       .then((res) => res.json())
-      .then((int) => setCurrentInt(int));
+      .then((int) => operation(int));
   };
   console.log('currentInt :>> ', currentInt);
   return (
@@ -80,15 +94,16 @@ function Integers(props) {
       </div>
       <div className="contents">
         <div className="login">
-          <table>
-            <button onClick={() => toggleButtonState(CURRENT_URL)}>
-              Get current int
-            </button>
-            <div> your current int is: {currentInt}</div>
-            <br />
-
-            <button variant="sign_in"> Log in </button>
-          </table>
+          <button onClick={() => toggleButtonState(CURRENT_URL)}>
+            Get current int
+          </button>
+          <div> your current int is: {currentInt}</div>
+          <br />
+          <button onClick={() => toggleButtonState(NEXT_URL)}>
+            Get next int
+          </button>
+          <div> your next int is: {nextInt}</div>
+          <br />
         </div>
       </div>
     </div>
