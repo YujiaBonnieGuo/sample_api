@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import GetCurrent from './GetCurrent';
 import '../App.css';
+const CURRENT_URL = '/api/v1/current';
 function GetToken(props) {
   const [token, setToken] = useState(null);
   console.log('props :>> ', props);
@@ -31,14 +31,23 @@ function GetToken(props) {
   console.log('token :>> ', token);
   return token;
 }
-
+function fetchAPI(url, jwtToken, props_current) {
+  // param is a highlighted word from the user before it clicked the button
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: jwtToken,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(props_current),
+  });
+}
 function Integers(props) {
   const jwtToken = GetToken(props);
   console.log('jwtToken :>> ', jwtToken);
   const emailAddress = props.sendEmailAddress;
   const username = props.sendUserName;
   const password = props.sendPassword;
-  //////////
   const [data, setData] = React.useState(null);
   const [currentInt, setCurrentInt] = React.useState(null);
 
@@ -56,21 +65,10 @@ function Integers(props) {
     token: jwtToken,
   };
   console.log('props_current :>> ', props_current);
-  function fetchAPI(param) {
-    // param is a highlighted word from the user before it clicked the button
-    return fetch('/api/v1/current', {
-      method: 'POST',
-      headers: {
-        Authorization: jwtToken,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(props_current),
-    });
-  }
-  const toggleButtonState = () => {
+
+  const toggleButtonState = (url) => {
     console.log('start toggleButtonState :>> ');
-    let selectedWord = window.getSelection().toString();
-    fetchAPI(selectedWord)
+    fetchAPI(url, jwtToken, props_current)
       .then((res) => res.json())
       .then((int) => setCurrentInt(int));
   };
@@ -83,10 +81,10 @@ function Integers(props) {
       <div className="contents">
         <div className="login">
           <table>
-            <button onClick={toggleButtonState}> Click me </button>
+            <button onClick={() => toggleButtonState(CURRENT_URL)}>
+              Get current int
+            </button>
             <div> your current int is: {currentInt}</div>
-            <label>Current Integer: </label>
-            <div class="boxed">{currentInt}</div>
             <br />
 
             <button variant="sign_in"> Log in </button>
