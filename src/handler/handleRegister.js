@@ -46,7 +46,7 @@ const handleRegister = async (req, res) => {
       let arr = await test.find().toArray();
       const initInt = arr[0].int;
       res.json(
-        `Successfully registed for username: ${username} with integer initialized as ${initInt}`
+        `Successfully registed for username: ${username} with integer initialized as ${initInt}, please login`
       );
     } catch (err) {
       const errorMsg = 'failed to register with error: ' + err.message;

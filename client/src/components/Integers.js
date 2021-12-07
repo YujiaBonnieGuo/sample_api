@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 const CURRENT_URL = '/api/v1/current';
 const NEXT_URL = '/api/v1/next';
+const RESET_URL = '/api/v1/reset';
 
 function GetToken(props) {
   const [token, setToken] = useState(null);
@@ -33,7 +34,10 @@ function GetToken(props) {
   console.log('token :>> ', token);
   return token;
 }
-function fetchAPI(url, jwtToken, props_current) {
+function fetchAPI(url, jwtToken, props_fetch, resetInt) {
+  if (resetInt) {
+    props_fetch.resetnumber = resetInt;
+  }
   // param is a highlighted word from the user before it clicked the button
   return fetch(url, {
     method: 'POST',
@@ -41,7 +45,7 @@ function fetchAPI(url, jwtToken, props_current) {
       Authorization: jwtToken,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(props_current),
+    body: JSON.stringify(props_fetch),
   });
 }
 function Integers(props) {
@@ -53,6 +57,8 @@ function Integers(props) {
   const [data, setData] = React.useState(null);
   const [currentInt, setCurrentInt] = React.useState(null);
   const [nextInt, setNextInt] = React.useState(null);
+  const [resetInt, setResetInt] = React.useState(null);
+  const [resetRes, setResetRes] = React.useState(null);
 
   React.useEffect(() => {
     fetch('/healthCheck')
@@ -61,15 +67,15 @@ function Integers(props) {
   }, []);
   console.log('healthCheck data :>> ', data);
 
-  const props_current = {
+  const props_fetch = {
     username: username,
     emailAddress: emailAddress,
     password: password,
     token: jwtToken,
   };
-  console.log('props_current :>> ', props_current);
+  console.log('props_fetch :>> ', props_fetch);
 
-  const toggleButtonState = (url) => {
+  const toggleButtonState = (url, resetInt) => {
     let operation;
     switch (url) {
       case CURRENT_URL:
@@ -78,11 +84,14 @@ function Integers(props) {
       case NEXT_URL:
         operation = setNextInt;
         break;
+      case RESET_URL:
+        operation = setResetRes;
+        break;
       default:
         console.log('wrong url :>> ', url);
     }
     console.log('start toggleButtonState :>> ');
-    fetchAPI(url, jwtToken, props_current)
+    fetchAPI(url, jwtToken, props_fetch, resetInt)
       .then((res) => res.json())
       .then((int) => operation(int));
   };
@@ -104,11 +113,26 @@ function Integers(props) {
           </button>
           <div> your next int is: {nextInt}</div>
           <br />
+
+          <br />
+          <input
+            type="text"
+            placeholder="Enter the integer you want to reset"
+            variant="basic_line"
+            value={resetInt}
+            onChange={(event) => setResetInt(event.target.value)}
+          />
+          <button onClick={() => toggleButtonState(RESET_URL, resetInt)}>
+            Reset
+          </button>
+          <div> your reset response is: {resetRes}</div>
+          <br />
         </div>
       </div>
     </div>
   );
 }
-
+// const [resetInt, setResetInt] = React.useState(null);
+// const [resetRes, setResetRes] = React.useState(null);
 //////////
 export default Integers;
