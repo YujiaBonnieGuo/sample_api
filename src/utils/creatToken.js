@@ -7,7 +7,7 @@ function creatToken(user_id) {
     },
     'secret',
     {
-      expiresIn: 60, //过期时间设置为60
+      expiresIn: 60, //expire time as 60s
     }
   );
   return token;

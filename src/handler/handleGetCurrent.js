@@ -2,7 +2,6 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
 const handleGetCurrent = async (req, res) => {
-  console.log('--- handleGetCurrent is called ---');
   const username = req.body.username || null;
   const emailAddress = req.body.emailAddress || null;
   const header = req.header;
@@ -34,6 +33,7 @@ const handleGetCurrent = async (req, res) => {
       }
       const current = arr[0].int;
       // update
+      console.log(`get the current number: ${current}`);
       res.json(current);
     } catch (err) {
       const errorMsg =

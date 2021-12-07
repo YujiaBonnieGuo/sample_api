@@ -6,7 +6,7 @@ function jwtValidation(req, res, next) {
   console.log('typeof token in jwtValidation: ', typeof token);
   console.log(' token in jwtValidation: ', token);
 
-  // 解析 token
+  // parse token
   if (token) {
     let decoded = jwt.decode(token);
     if (decoded.user_id !== req.body.username) {

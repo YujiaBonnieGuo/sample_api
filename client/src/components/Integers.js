@@ -72,7 +72,7 @@ function Integers(props) {
     let selectedWord = window.getSelection().toString();
     fetchAPI(selectedWord)
       .then((res) => res.json())
-      .then((int) => setCurrentInt(int.int));
+      .then((int) => setCurrentInt(int));
   };
   console.log('currentInt :>> ', currentInt);
   return (
