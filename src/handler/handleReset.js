@@ -24,7 +24,6 @@ const handleReset = async (req, res) => {
       const test = conn.db('test').collection(username);
       // find
       let arr = await test.find().toArray();
-      console.log(arr);
       const databaseID = arr[0].userid;
       if (!validateId(userid, databaseID)) {
         const erorObj = { message: 'userid can not match with username ' };
@@ -37,7 +36,6 @@ const handleReset = async (req, res) => {
       await test.updateMany({ int: current }, { $set: { int: resetnumber } });
       // find
       arr = await test.find().toArray();
-      console.log(arr);
       const currentIn = arr[0].int;
       res.json(
         `Your have reset your integer from: ${current} to a new integer: ${currentIn}`

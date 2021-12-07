@@ -44,14 +44,12 @@ const handleRegister = async (req, res) => {
       });
       // find
       let arr = await test.find().toArray();
-      console.log(arr);
       const initInt = arr[0].int;
       res.json(
         `Successfully registed for username: ${username} with integer initialized as ${initInt}`
       );
     } catch (err) {
       const errorMsg = 'failed to register with error: ' + err.message;
-      console.log(errorMsg);
       res.json(errorMsg);
     } finally {
       if (connection != null) connection.close();

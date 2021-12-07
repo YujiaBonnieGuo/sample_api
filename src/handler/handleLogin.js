@@ -6,6 +6,8 @@ function validateId(userid, databaseID) {
   return userid === databaseID;
 }
 const handleLogin = async (req, res) => {
+  console.log(' --- handleLogin is called ---');
+
   const username = req.body.username || null;
   const userid = req.body.userid || null;
   console.log('username :>> ', username);
@@ -43,7 +45,6 @@ const handleLogin = async (req, res) => {
           { $set: { jwtToken: jwtToken } }
         );
       }
-      console.log(arr);
       res.json(jwtToken);
     } catch (err) {
       const errorMsg = 'failed to login with error: ' + err.message;

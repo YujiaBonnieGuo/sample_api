@@ -2,11 +2,10 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
 const handleGetCurrent = async (req, res) => {
-  console.log('start handleGetCurrent :>> ');
+  console.log('--- handleGetCurrent is called ---');
   const username = req.body.username || null;
   const userid = req.body.userid || null;
   const header = req.header;
-  // console.log('header :>> ', JSON.stringify(header));
   console.log('header :>> ', header.username);
 
   if (!username || !userid) {
@@ -26,7 +25,6 @@ const handleGetCurrent = async (req, res) => {
       const test = conn.db('test').collection(username);
       // find
       let arr = await test.find().toArray();
-      console.log(arr);
       const databaseID = arr[0].userid;
       if (!validateId(userid, databaseID)) {
         const erorObj = { message: 'userid can not match with username ' };
@@ -34,12 +32,10 @@ const handleGetCurrent = async (req, res) => {
       }
       const current = arr[0].int;
       // update
-      console.log('current :>> ', current);
       res.json(`Your current integer is: ${current}`);
     } catch (err) {
       const errorMsg =
         'failed to get integer in database with error: ' + err.message;
-      console.log(errorMsg);
       res.json(errorMsg);
     } finally {
       if (conn != null) conn.close();

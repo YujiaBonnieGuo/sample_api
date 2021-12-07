@@ -22,7 +22,6 @@ const handleGetNext = async (req, res) => {
       const test = connection.db('test').collection(username);
       // find
       let arr = await test.find().toArray();
-      console.log(arr);
       const databaseID = arr[0].userid;
       if (!validateId(userid, databaseID)) {
         const erorObj = { message: 'userid can not match with username ' };
@@ -37,7 +36,6 @@ const handleGetNext = async (req, res) => {
       // await test.updateMany({ int: current }, { $set: { int: next } });
       // find
       arr = await test.find().toArray();
-      console.log(arr);
       const nextIn = arr[0].int;
       res.json(
         `Your current integer is: ${current}, and your next integer is ${nextIn}`

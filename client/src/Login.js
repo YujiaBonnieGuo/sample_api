@@ -1,40 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Login.css';
-
-function GetToken(props) {
-  console.log('props :>> ', props);
-  const emailAddress = props.sendEmailAddress;
-  const userName = props.sendUserName;
-  const password = props.sendPassword;
-  const bodyContents = {
-    username: emailAddress,
-    userid: userName,
-    password: password,
-  };
-  //////////
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    fetch('/api/v1/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bodyContents),
-    })
-      .then((res) => res.json())
-      .then((token) => setToken(token.message));
-  }, []);
-  console.log('token :>> ', token);
-  return token;
-}
 
 const Login = (props) => {
   const [emailAddress, setEmailAddress] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const jwtToken = GetToken(props);
-  console.log('jwtToken :>> ', jwtToken);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     props.getEmail(emailAddress);

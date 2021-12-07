@@ -26,12 +26,6 @@ const App = (props) => {
           sendEmailAddress={emailAddress}
           sendUserId={userName}
           sendPassword={password}
-          // customize bell color: bellColor="DeepPink"
-          // customize index color: indexColor="DeepSkyBlue"
-          // customize bell position: floatPosition="middle"
-          // customize bell size: enlargeBell="50"
-          // test locally (message serveiv): notificationReadIndication={`http://localhost:4000/notificationReadIndication`}
-          // test locally (message serveiv): getNotification={`http://localhost:4000/getNotification/`}
         />
       </div>
     );
