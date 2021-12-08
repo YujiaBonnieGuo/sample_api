@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "9844285f-897b-457f-9603-663d61bb8566",
+		"name": "Thinkific",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get next",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const content = JSON.parse(pm.request.body.raw)\r",
+							"const body_username = content.username\r",
+							"const body_email = content.emailAddress\r",
+							"const body_pwd = content.password\r",
+							"\r",
+							"console.log('content: ',content)\r",
+							"\r",
+							"console.log('body_username: ',body_username)\r",
+							"console.log('body_email: ',body_email)\r",
+							"console.log('body_pwd: ',body_pwd)\r",
+							"const bodyContent =content\r",
+							"const options = {\r",
+							"  'method': 'POST',\r",
+							"  'url': 'http://localhost:8080/api/v1/login',\r",
+							"  'header': {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  'body':{\r",
+							"      mode: 'raw',\r",
+							"      raw:JSON.stringify({\r",
+							"    \"username\":body_username,\r",
+							"    \"emailAddress\":body_email,\r",
+							"    \"password\":body_pwd\r",
+							"})\r",
+							"  } \r",
+							"};\r",
+							"pm.sendRequest(options, function (error, response) {\r",
+							"  if (error) throw new Error(error);\r",
+							"  console.log('response.json',response.json())\r",
+							"  pm.environment.set(\"accessToken\",  response.json().token);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "username",
+						"value": "bonnie",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "userid",
+						"value": "bonnieguo1994@gmail.com",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"bonnie\",\r\n    \"emailAddress\":\"bonnie@gmail.com\",\r\n    \"password\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/next",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"next"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get current",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const content = JSON.parse(pm.request.body.raw)\r",
+							"const body_username = content.username\r",
+							"const body_email = content.emailAddress\r",
+							"const body_pwd = content.password\r",
+							"\r",
+							"console.log('content: ',content)\r",
+							"\r",
+							"console.log('body_username: ',body_username)\r",
+							"console.log('body_email: ',body_email)\r",
+							"console.log('body_pwd: ',body_pwd)\r",
+							"const bodyContent =content\r",
+							"const options = {\r",
+							"  'method': 'POST',\r",
+							"  'url': 'http://localhost:8080/api/v1/login',\r",
+							"  'header': {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  'body':{\r",
+							"      mode: 'raw',\r",
+							"      raw:JSON.stringify({\r",
+							"    \"username\":body_username,\r",
+							"    \"emailAddress\":body_email,\r",
+							"    \"password\":body_pwd\r",
+							"})\r",
+							"  } \r",
+							"};\r",
+							"pm.sendRequest(options, function (error, response) {\r",
+							"  if (error) throw new Error(error);\r",
+							"  console.log('response.json',response.json())\r",
+							"  pm.environment.set(\"accessToken\",  response.json().token);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "username",
+						"value": "bonnie",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "userid",
+						"value": "bonnieguo1994@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "APIKey",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"bonnie\",\r\n    \"emailAddress\":\"bonnie@gmail.com\",\r\n    \"password\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/current",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "username",
+						"value": "bonnie",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "userid",
+						"value": "bonnieguo1994@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "APIKey",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"bonnie\",\r\n    \"emailAddress\":\"bonnie@gmail.com\",\r\n    \"password\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "userName",
+						"value": "bonnie",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "userId",
+						"value": "bonnieguo1994@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "{{Dev-accessToken_automationTC}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"username\": \"bonnie\",\r\n        \"emailAddress\": \"bonnie@gmail.com\",\r\n        \"password\": \"test\",\r\n        \"int\": \"0\"\r\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reset",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const content = JSON.parse(pm.request.body.raw)\r",
+							"const body_username = content.username\r",
+							"const body_email = content.emailAddress\r",
+							"const body_pwd = content.password\r",
+							"\r",
+							"console.log('content: ',content)\r",
+							"\r",
+							"console.log('body_username: ',body_username)\r",
+							"console.log('body_email: ',body_email)\r",
+							"console.log('body_pwd: ',body_pwd)\r",
+							"const bodyContent =content\r",
+							"const options = {\r",
+							"  'method': 'POST',\r",
+							"  'url': 'http://localhost:8080/api/v1/login',\r",
+							"  'header': {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  'body':{\r",
+							"      mode: 'raw',\r",
+							"      raw:JSON.stringify({\r",
+							"    \"username\":body_username,\r",
+							"    \"emailAddress\":body_email,\r",
+							"    \"password\":body_pwd\r",
+							"})\r",
+							"  } \r",
+							"};\r",
+							"pm.sendRequest(options, function (error, response) {\r",
+							"  if (error) throw new Error(error);\r",
+							"  console.log('response.json',response.json())\r",
+							"  pm.environment.set(\"accessToken\",  response.json().token);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "username",
+						"value": "bonnie",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "userid",
+						"value": "bonnieguo1994@gmail.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "resetnumber",
+						"value": "10",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"bonnie\",\r\n    \"emailAddress\":\"bonnie@gmail.com\",\r\n    \"password\":\"test\",\r\n    \"resetnumber\":10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/reset",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reset"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "healthcheck",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/healthcheck",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"healthcheck"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
