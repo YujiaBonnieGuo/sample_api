@@ -80,7 +80,7 @@ label {
   margin: auto;
   padding: 40px 0;
   border-radius: 3px;
-  background-color: #f1f3f3;
+  background-color: rgb(235, 237, 240, 255);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -89,5 +89,5 @@ label {
   width: 50%;
   padding: 30px;
   border-radius: 4px;
-  background-color: white;
+  background-color: rgb(243, 244, 247, 255);
 }
