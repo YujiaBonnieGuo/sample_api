@@ -27,13 +27,7 @@ function GetToken(props) {
       body: JSON.stringify(bodyContents),
     })
       .then((res) => res.json())
-      .then((res) => {
-        if (res.token) {
-          setToken(res.token);
-        } else {
-          setToken(false);
-        }
-      });
+      .then((res) => setToken(res));
   }, []);
   console.log('token :>> ', token);
   return token;

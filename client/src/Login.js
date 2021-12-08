@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Login.css';
-const REGISTER_URL = '/api/v1/register';
+import logo from './thinkific-logo-white.png';
 
+const REGISTER_URL = '/api/v1/register';
 function fetchAPI(props_fetch) {
   // param is a highlighted word from the user before it clicked the button
   return fetch(REGISTER_URL, {
@@ -43,6 +44,7 @@ const Login = (props) => {
     <div className="mainWrap">
       <div className="header">
         <div className="header-fill"></div>
+        <img src={logo} alt="Logo" />
       </div>
       <div className="contents">
         <div className="login">
@@ -61,8 +63,8 @@ const Login = (props) => {
             Email Address
             <br />
             <input
-              type="text"
-              placeholder="Enter your email address"
+              type="email"
+              placeholder="example@thinkific.com"
               variant="basic_line"
               value={emailAddress}
               onChange={(event) => setEmailAddress(event.target.value)}
@@ -72,7 +74,7 @@ const Login = (props) => {
             Password
             <br />
             <input
-              type="text"
+              type="password"
               placeholder="Enter your password"
               variant="basic_line"
               value={password}
@@ -80,9 +82,14 @@ const Login = (props) => {
             />
             <br />
             <br />
-            <button variant="sign_in"> Log in </button>
+            <button className="button" variant="sign_in">
+              Log in
+            </button>
           </form>
-          <button onClick={() => toggleButtonState(props_fetch)}>
+          <button
+            className="button"
+            onClick={() => toggleButtonState(props_fetch)}
+          >
             Register
           </button>
           <div> {registerRes}</div>
