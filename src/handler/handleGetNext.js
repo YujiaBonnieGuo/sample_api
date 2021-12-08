@@ -2,6 +2,7 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 let url = 'mongodb://localhost:27017/';
 const handleGetNext = async (req, res) => {
+  console.log(' --- start handleGetNext --- ');
   const username = req.body.username || null;
   const emailAddress = req.body.emailAddress || null;
 
@@ -24,10 +25,10 @@ const handleGetNext = async (req, res) => {
       let arr = await test.find().toArray();
       const databaseID = arr[0].emailAddress;
       if (!validateId(emailAddress, databaseID)) {
-        const erorObj = {
+        const errorObj = {
           message: 'emailAddress can not match with username ',
         };
-        throw erorObj;
+        throw errorObj;
       }
       const current = arr[0].int;
       console.log('current :>> ', current);
@@ -35,8 +36,6 @@ const handleGetNext = async (req, res) => {
       const next = parseInt(current) + 1;
       console.log('next :>> ', next);
       await test.updateOne({ int: current }, { $set: { int: next } });
-      // await test.updateMany({ int: current }, { $set: { int: next } });
-      // find
       arr = await test.find().toArray();
       const nextIn = arr[0].int;
       console.log(

@@ -26,8 +26,8 @@ const handleRegister = async (req, res) => {
       connection = await MongoClient.connect(url);
       const ifValidusername = await checkusername(connection, username);
       if (!ifValidusername) {
-        const erorObj = { message: 'emailAddress already exist' };
-        throw erorObj;
+        const errorObj = { message: 'user already exists' };
+        throw errorObj;
       }
       console.log(
         `successfully connected to the database with username: ${username}`

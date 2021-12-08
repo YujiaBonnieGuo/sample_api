@@ -47,11 +47,11 @@ const handleLogin = async (req, res) => {
         arr[0].emailAddress !== emailAddress ||
         arr[0].password !== password
       ) {
-        const erorObj = {
+        const errorObj = {
           status: 'failed',
           message: 'emailAddress can not match with username ',
         };
-        throw erorObj;
+        throw errorObj;
       }
       const jwtToken = creatToken(username);
       console.log('jwtToken :>> ', jwtToken);
@@ -71,11 +71,11 @@ const handleLogin = async (req, res) => {
     } catch (err) {
       const errorMsg = 'failed to login with error: ' + err.message;
       console.log(errorMsg);
-      const erorObj = {
+      const errorObj = {
         status: 'failed',
         message: errorMsg,
       };
-      res.json(erorObj);
+      res.json(errorObj);
     } finally {
       if (conn != null) conn.close();
     }

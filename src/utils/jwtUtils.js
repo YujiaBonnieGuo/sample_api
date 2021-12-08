@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 function jwtValidation(req, res, next) {
   console.log('start jwtValidation :>> ');
   let token = req.body.token || req.query.token || req.headers['authorization'];
-  console.log('typeof token in jwtValidation: ', typeof token);
   console.log(' token in jwtValidation: ', token);
 
   // parse token

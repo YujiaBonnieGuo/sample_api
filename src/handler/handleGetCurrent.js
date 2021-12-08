@@ -26,10 +26,10 @@ const handleGetCurrent = async (req, res) => {
       let arr = await test.find().toArray();
       const databaseID = arr[0].emailAddress;
       if (!validateId(emailAddress, databaseID)) {
-        const erorObj = {
+        const errorObj = {
           message: 'emailAddress can not match with username ',
         };
-        throw erorObj;
+        throw errorObj;
       }
       const current = arr[0].int;
       // update

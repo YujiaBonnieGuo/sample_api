@@ -16,7 +16,7 @@ function fetchAPI(props_fetch) {
 
 const Login = (props) => {
   const [emailAddress, setEmailAddress] = useState('');
-  const [username, setusername] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [registerRes, setRegisterRes] = useState('');
 
@@ -29,7 +29,7 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.getEmail(emailAddress);
-    props.getusername(username);
+    props.getUserName(username);
     props.getPassword(password);
     props.callback(true);
   };
@@ -57,7 +57,7 @@ const Login = (props) => {
               placeholder="Enter your user name"
               variant="basic_line"
               value={username}
-              onChange={(event) => setusername(event.target.value)}
+              onChange={(event) => setUserName(event.target.value)}
             />
             <br />
             <br />

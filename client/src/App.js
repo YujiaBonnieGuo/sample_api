@@ -3,16 +3,16 @@ import './App.css';
 import Login from './Login';
 import Integers from './components/Integers.js';
 const App = (props) => {
-  let [isLoggedin, setLoggeedin] = useState(false);
+  let [isLoggedIn, setLoggedIn] = useState(false);
   let [emailAddress, setEmailAddress] = useState('');
-  let [username, setusername] = useState('');
+  let [username, setUserName] = useState('');
   let [password, setPassword] = useState('');
-  if (isLoggedin === false) {
+  if (isLoggedIn === false) {
     return (
       <Login
-        callback={setLoggeedin}
+        callback={setLoggedIn}
         getEmail={setEmailAddress}
-        getusername={setusername}
+        getUserName={setUserName}
         getPassword={setPassword}
       />
     );
