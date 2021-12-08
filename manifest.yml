@@ -1,0 +1,14 @@
+---
+applications:
+  - name: incrementing-integers-service
+    memory: 512M
+    instances: 1
+    timeout: 180
+    routes:
+      - route: incrementing-integers-service.apps.cac.preview.pcf.thinkific.com
+    buildpack: nodejs_buildpack
+    env:
+      APP_NAME: 'incrementing-integers-service'
+      FRAMEWORK_CONFIG_LOCATION: 'remote'
+      FRAMEWORK_CONFIG_PROFILE: 'dev'
+      FRAMEWORK_CONFIG_SERVER_NAME: 'thinkific-config-server'
