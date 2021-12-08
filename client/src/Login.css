@@ -5,7 +5,7 @@
 .button {
   background: rgb(249, 174, 92, 255);
   border: none;
-  color: white;
+  color: black;
   padding: 7px;
   text-align: center;
   text-decoration: none;
@@ -25,8 +25,8 @@ label {
   margin-left: auto;
 }
 .logo {
-  float: left;
-  padding: 60px 60px;
+  align-items: left;
+  text-align: center;
 }
 .mainWrap::after {
   display: block;
@@ -59,6 +59,7 @@ label {
   font-weight: 600;
   height: 79px;
   color: white;
+  margin-right: 60px;
 }
 
 .header-fill:hover {

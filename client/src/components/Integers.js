@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+// import '../App.css';
+import '../Login.css';
+import logo from '../thinkific-logo-white.png';
 const CURRENT_URL = '/api/v1/current';
 const NEXT_URL = '/api/v1/next';
 const RESET_URL = '/api/v1/reset';
@@ -71,7 +73,9 @@ function Integers(props) {
     return (
       <div className="mainWrap">
         <div className="header">
-          <div className="header-fill"></div>
+          <div className="header-fill">
+            <img className="logo" src={logo} alt="Logo" />
+          </div>
         </div>
         <div className="contents">
           Login failed, please refresh the page and try to login again with the
@@ -112,16 +116,24 @@ function Integers(props) {
   return (
     <div className="mainWrap">
       <div className="header">
-        <div className="header-fill"></div>
+        <div className="header-fill">
+          <img className="logo" src={logo} alt="Logo" />
+        </div>
       </div>
       <div className="contents">
         <div className="login">
-          <button onClick={() => toggleButtonState(CURRENT_URL)}>
+          <button
+            className="button"
+            onClick={() => toggleButtonState(CURRENT_URL)}
+          >
             Get current int
           </button>
           <div> your current int is: {currentInt}</div>
           <br />
-          <button onClick={() => toggleButtonState(NEXT_URL)}>
+          <button
+            className="button"
+            onClick={() => toggleButtonState(NEXT_URL)}
+          >
             Get next int
           </button>
           <div> your next int is: {nextInt}</div>
@@ -135,10 +147,13 @@ function Integers(props) {
             value={resetInt}
             onChange={(event) => setResetInt(event.target.value)}
           />
-          <button onClick={() => toggleButtonState(RESET_URL, resetInt)}>
+          <button
+            className="button"
+            onClick={() => toggleButtonState(RESET_URL, resetInt)}
+          >
             Reset
           </button>
-          <div> your reset response is: {resetRes}</div>
+          <div>{resetRes}</div>
           <br />
         </div>
       </div>

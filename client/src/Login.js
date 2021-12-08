@@ -43,8 +43,9 @@ const Login = (props) => {
   return (
     <div className="mainWrap">
       <div className="header">
-        <div className="header-fill"></div>
-        <img src={logo} alt="Logo" />
+        <div className="header-fill">
+          <img className="logo" src={logo} alt="Logo" />
+        </div>
       </div>
       <div className="contents">
         <div className="login">
