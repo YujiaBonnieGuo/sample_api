@@ -8,7 +8,6 @@ const RESET_URL = '/api/v1/reset';
 
 function GetToken(props) {
   const [token, setToken] = useState(null);
-  console.log('props :>> ', props);
   const emailAddress = props.sendEmailAddress;
   const username = props.sendUserName;
   const password = props.sendPassword;
@@ -17,7 +16,6 @@ function GetToken(props) {
     emailAddress: emailAddress,
     password: password,
   };
-  console.log('bodyContents :>> ', bodyContents);
   //////////
 
   useEffect(() => {
@@ -31,7 +29,6 @@ function GetToken(props) {
       .then((res) => res.json())
       .then((res) => setToken(res));
   }, []);
-  console.log('token :>> ', token);
   return token;
 }
 function fetchAPI(url, jwtToken, props_fetch, resetInt) {
@@ -63,9 +60,7 @@ function Integers(props) {
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
-  console.log('healthCheck data :>> ', data);
   let jwtToken = GetToken(props);
-  console.log('jwtToken :>> ', jwtToken);
 
   if (jwtToken && jwtToken.token && jwtToken.status === 'success') {
     jwtToken = jwtToken.token;
@@ -105,14 +100,12 @@ function Integers(props) {
         operation = setResetRes;
         break;
       default:
-        console.log('wrong url :>> ', url);
     }
     console.log('start toggleButtonState :>> ');
     fetchAPI(url, jwtToken, props_fetch, resetInt)
       .then((res) => res.json())
       .then((int) => operation(int));
   };
-  console.log('currentInt :>> ', currentInt);
   return (
     <div className="mainWrap">
       <div className="header">

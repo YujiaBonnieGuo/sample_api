@@ -5,7 +5,7 @@ const handleReset = async (req, res) => {
   const username = req.body.username || null;
   const emailAddress = req.body.emailAddress || null;
   const resetnumber = parseInt(req.body.resetnumber) || 0;
-  console.log('resetnumber :>> ', resetnumber);
+  console.log(' start handleReset with reset number :>> ', resetnumber);
 
   if (!username || !emailAddress) {
     console.log('invalid username or emailAddress');
@@ -32,8 +32,6 @@ const handleReset = async (req, res) => {
         throw errorObj;
       }
       const current = arr[0].int;
-      console.log('currentInt :>> ', current);
-      console.log('resetnumber :>> ', resetnumber);
       // update
       await test.updateMany({ int: current }, { $set: { int: resetnumber } });
       // find

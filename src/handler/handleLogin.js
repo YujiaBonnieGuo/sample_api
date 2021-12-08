@@ -5,13 +5,10 @@ let url = 'mongodb://localhost:27017/';
 
 const handleLogin = async (req, res) => {
   console.log(' --- handleLogin is called ---');
-  console.log('req.body in handleLogin :>> ', req.body);
   const username = req.body.username || null;
   const emailAddress = req.body.emailAddress || null;
   const password = req.body.password || null;
-  console.log('username :>> ', username);
-  console.log('emailAddress :>> ', emailAddress);
-  console.log('password :>> ', password);
+  console.log('req.body :>> ', req.body);
   if (!password) {
     const errorMsg =
       'invalid password, please refresh the page and try to login again';
@@ -54,7 +51,6 @@ const handleLogin = async (req, res) => {
         throw errorObj;
       }
       const jwtToken = creatToken(username);
-      console.log('jwtToken :>> ', jwtToken);
       if (!arr[0].jwtToken) {
         await test.insertOne({ jwtToken: jwtToken });
       } else {

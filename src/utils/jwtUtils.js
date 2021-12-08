@@ -3,12 +3,10 @@ const jwt = require('jsonwebtoken');
 function jwtValidation(req, res, next) {
   console.log('start jwtValidation :>> ');
   let token = req.body.token || req.query.token || req.headers['authorization'];
-  console.log(' token in jwtValidation: ', token);
 
   // parse token
   if (token) {
     let decoded = jwt.decode(token);
-    console.log('decoded :>> ', decoded);
     if (decoded.user_id !== req.body.username) {
       return res.json({ success: false, message: 'invalid token' });
     }
