@@ -185,6 +185,10 @@ Since I had the experience to embed the SSO for internal, I would like to learn 
 Postman collection is submitted and hopes it has some help for the test.
 There are pre scripts create for each postman collection for the JWT token got from Login endpoint.
 
+you can also get the postman collection under main path './Integers_api.postman_collection.json'
+
+please let me know if you have any questions about the project and collection.
+
 ### Your feedback on this technical challenge
 
 ```
