@@ -175,11 +175,6 @@ npm start
 
 REACT app will running on page http://localhost:3000/
 
-### What did you not include in your solution that you want us to know about?
-
-When I tried the solution 'Allow sign up using OAuth', I learned from some tutorials and I am pretty interested in it.
-Since I had the experience to embed the SSO for internal, I would like to learn more about how build up the service.
-
 ### Other
 
 Postman collection is submitted and hopes it has some help for the test.
@@ -188,13 +183,3 @@ There are pre scripts create for each postman collection for the JWT token got f
 you can also get the postman collection under main path './Integers_api.postman_collection.json'
 
 please let me know if you have any questions about the project and collection.
-
-### Your feedback on this technical challenge
-
-```
-Really appreciate this opportunity to get more information about Thinkific. I love the approach of testing people, instead of several online assignments in one or two hours, this assignment is more focused on the how the process for the product development, from the business acceptance criteria to the app structure, from the database to the front-end application.
-
-According to the first interview and the assignment, I believe Thinkific is a company that take care of the overall situation and full of humanity.
-
-Hope I can move further and get a chance to work with amazing teams in Thinkific
-```
